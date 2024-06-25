@@ -1,24 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import ThemeProvider from './theme';
+import SearchAppBar from './component/SearchAppBar';
+import HomePage from './pages/HomePage';
+// import DetailPage from './pages/DetaiPage';
+import { AuthProvider } from './contexts/AuthContext';
+import BasicModal from './modal/BasicModal';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <>
+   <AuthProvider>
+    <ThemeProvider>
+        <SearchAppBar/>
+        <Routes>
+          <Route path="/" element={<HomePage/>} />
+          <Route path="/job/:id" element={<BasicModal/>} />
+        </Routes>
+      </ThemeProvider>
+    </AuthProvider>
+   </>
   );
 }
 
