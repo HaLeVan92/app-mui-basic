@@ -37,7 +37,7 @@ function LoginForm({ callback }) {
   };
 
   return (
-    <Box sx={style} component="form" gap={4} sx={{backgroundColor: 'success.light'}}>
+    <Box sx={{backgroundColor: 'success.light', style}} component="form" gap={4} >
       <Typography variant="h3" component="div">
         Login
       </Typography>
