@@ -1,34 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import CssBaseline from '@mui/material/CssBaseline';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { BrowserRouter } from "react-router-dom";
+
 import ThemeProvider from "./theme";
+import AuthProvider from "./auth/AuthProvider";
 
-
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import ErrorPage from './pages/ErrorPage';
-
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App/>,
-    errorElement: <ErrorPage />,
-  },
-]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
 
-      <ThemeProvider>
-        <CssBaseline />
-        <RouterProvider router={router} />       
-      </ThemeProvider>
+  
+  <BrowserRouter>
+      <AuthProvider>
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
+      </AuthProvider>
+  </BrowserRouter>
+,
   
   
 );
-

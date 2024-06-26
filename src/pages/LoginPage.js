@@ -1,35 +1,21 @@
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import Stack from "@mui/material/Stack";
+import LoginForm from "../component/LoginForm";
+
 
 function LoginPage() {
   let navigate = useNavigate();
-  let location = useLocation();
-  let auth = useAuth();
-
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    let from = location.state?.from?.pathname || "/";
-    let formData = new FormData(event.currentTarget);
-    let username = formData.get("username");
-
-    auth.login(username, () => {
-      navigate(from, { replace: true });
-    });
-  }
+  let from = navigate.state?.from?.pathname || "/";
 
   return (
-    <div>
-      <h1>LoginPage</h1>
-
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username: <input name="username" type="text" />
-        </label>{" "}
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <Stack sx={{ p: 4, alignItems: "center" }}>
+      <LoginForm
+        callback={() => {
+          navigate(from, { replace: true });
+        }}
+      />
+    </Stack>
   );
 }
 

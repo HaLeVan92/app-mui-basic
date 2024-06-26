@@ -1,42 +1,77 @@
-import * as React from 'react';
+import React, { useContext } from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { Button } from '@mui/material';
 import Divider from '@mui/material/Divider';
-import SkillsPaper from './SkillsPaper';
-import { useNavigate } from 'react-router-dom';
-import BasicModal from '../modal/BasicModal';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { styled } from "@mui/material/styles";
+import AuthContext from "../auth/AuthContext";
+import Stack from "@mui/material/Stack";
+import SkillsPaper from "./SkillsPaper";
+
+
+
+const CardStyle = styled(Card)(({ theme }) => ({
+  boxShadow: "none",
+  border: "1px solid black",
+  width: "100%",
+  maxWidth: "350px",
+  minWidth: "270px",
+  height: "320px",
+  margin: "auto",
+  backgroundColor: theme.palette.primary.light,
+}));
 
 
 
 
-export default function JobCard({job}) {
+export default function JobCard({description, skills, id, title}) {
 
+  const auth = useContext(AuthContext);
   const navigate = useNavigate();
+  let location = useLocation();
+  const hanleClick = (event) => {
+    if (auth.user) {
+      navigate(`/job/${id}`);
+    } else {
+      navigate("/login");
+    }
+  };
 
-  
   return (
-    <Card onClick={() => navigate(`/job/${job.id}`)} 
-    sx={{height : 340 , position: 'relative'}}
-      
-    >
-      <CardActionArea>
+    <CardStyle ariant="outlined" sx = {{ height: '400px'}}>
+      <Stack
+        direction="column"
+        justifyContent="space-between"
+        alignItems="center"
+        height="100%"
+        padding="5px"          
+      >
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" color="success.contrastText">
-            {job.title}
+          <Typography
+            sx={{ color: (theme) => theme.palette.common.white }}
+
+          >
+            <h2>{title} </h2>
           </Typography>
           <Divider />
-          <SkillsPaper skills={job.skills} />
-          <Typography variant="body2"  color="success.contrastText">
-            {job.description}
-          </Typography>      
+          <SkillsPaper skills={skills} />
+          <Typography sx={{ color: (theme) => theme.palette.common.white }}>
+            {description}
+          </Typography>
         </CardContent>
-      </CardActionArea>
-      <CardActions sx={{position: 'absolute', bottom:'10px', left: '80px'}}>       
-        <BasicModal/>
-      </CardActions>
-    </Card>
+        <Button
+          variant="contained"
+          component={Link}
+          to={`/job/${id}`}
+          state={{ backgroundLocation: location }}
+          sx={{ width: "140px", backgroundColor: "#df9e0b", marginBottom: "5px"  }}
+        >
+          Learn More
+        </Button>
+      </Stack>
+    </CardStyle>
   );
 
 }

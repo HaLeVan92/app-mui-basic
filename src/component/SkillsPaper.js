@@ -14,10 +14,11 @@ function SkillsPaper({ skills }) {
         display: "flex",
         justifyContent: "start",
         flexWrap: "wrap",
-        listStyle: "none",      
+        listStyle: "none",
         p: 0.5,
         m: 0,
         boxShadow: 0,
+        backgroundColor: (theme) => theme.palette.primary.light,
       }}
       component="ul"
     >

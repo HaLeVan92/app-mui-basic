@@ -1,31 +1,25 @@
-import React from 'react';
-import jobs from "../jobs.json";
-import { useParams } from 'react-router-dom';
-import { Container, Typography } from '@mui/material';
-function DetailPage() {
-  const params = useParams();
-  const jobID = params.id;
-  const job = jobs.find((job) => job.id === jobID);
+import React, { useEffect, useState } from "react";
+import RequireAuth from "../auth/RequireAuth";
+import api from "../data/fetchData";
+import { useParams } from "react-router-dom";
 
-  if (!job) {
-    return (
-      <Typography variant="h3" marginTop={3}>
-        No job found
-      </Typography>
-    );
-  }
-
+function JobDetail() {
+  const [job, setJob] = useState();
+  let { id } = useParams();
+  useEffect(() => {
+    const fetch = async () => {
+      const data = await api.getJob(id);
+      setJob(data);
+    };
+    fetch();
+  }, [id]);
   return (
-    <Container sx={{ width: 900}} >
-      <Typography variant="h3" marginTop={3} color="success.contrastText">
-        {job.description}
-      </Typography>
-
-      {/* <Box marginTop={3} sx={{display: "flex"}}>
-
-      </Box> */}
-    </Container>
-  )
+    <div>
+      <RequireAuth callback={() => {}}>
+        <h1>{job?.title}</h1>
+      </RequireAuth>
+    </div>
+  );
 }
 
-export default DetailPage;
+export default JobDetail;
