@@ -5,8 +5,9 @@ import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { useNavigate, useParams } from "react-router-dom";
-import api from "../data/fetchData";
+
 import SkillsPaper from "./SkillsPaper";
+import { getJob } from "../data/fetchData";
 
 const style = {
   position: "absolute",
@@ -27,7 +28,7 @@ function DetailModal() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await api.getJob(id);
+      const data = await getJob(id);
       setJob(data);
     };
     fetchData();

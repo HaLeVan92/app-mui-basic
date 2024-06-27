@@ -1,6 +1,6 @@
 import jobs from "./jobs.json";
 
-async function getJobs(page, q = null) {
+export async function getJobs(page, q = null) {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve();
@@ -23,7 +23,7 @@ async function getJobs(page, q = null) {
   }
 }
 
-async function getJob(id) {
+export async function getJob(id) {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve();
@@ -34,4 +34,4 @@ async function getJob(id) {
   return jobs.find((job) => job.id === id);
 }
 
-export default { getJobs, getJob };
+// exports { getJobs, getJob };

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import api from "../data/fetchData";
-import Pagination from "@mui/material/Pagination";
 
+import Pagination from "@mui/material/Pagination";
 import { styled } from "@mui/material/styles";
 import { useSearchParams } from "react-router-dom";
 import { Typography } from "@mui/material";
 import JobCard from "../component/JobCard";
+import { getJobs } from "../data/fetchData";
 
 const CentterPagination = styled(Pagination)(({ theme }) => ({
   ul: {
@@ -17,16 +17,17 @@ const CentterPagination = styled(Pagination)(({ theme }) => ({
 
 function Home() {
   const [jobs, setJobs] = useState([]);
-  const [pagesTotal, setPagesTotal] = useState(0);
+
   const [page, setPage] = useState(1);
+  // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
   const q = searchParams.get("q");
 
   useEffect(() => {
     const fetch = async () => {
-      const data = await api.getJobs(page, q);
+      const data = await getJobs(page, q);
       setJobs(data.jobs);
-      setPagesTotal(data.pagesTotal);
+
     };
     fetch();
   }, [page, q]);
