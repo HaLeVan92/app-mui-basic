@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 import Divider from '@mui/material/Divider';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import {  useLocation, Link } from 'react-router-dom';
 import { styled } from "@mui/material/styles";
-import AuthContext from "../auth/AuthContext";
+
 import Stack from "@mui/material/Stack";
 import SkillsPaper from "./SkillsPaper";
 
@@ -28,16 +28,10 @@ const CardStyle = styled(Card)(({ theme }) => ({
 
 export default function JobCard({description, skills, id, title}) {
 
-  const auth = useContext(AuthContext);
-  const navigate = useNavigate();
+
+
   let location = useLocation();
-  const hanleClick = (event) => {
-    if (auth.user) {
-      navigate(`/job/${id}`);
-    } else {
-      navigate("/login");
-    }
-  };
+ 
 
   return (
     <CardStyle ariant="outlined" sx = {{ height: '450px'}}>
