@@ -40,7 +40,7 @@ export default function JobCard({description, skills, id, title}) {
   };
 
   return (
-    <CardStyle ariant="outlined" sx = {{ height: '400px'}}>
+    <CardStyle ariant="outlined" sx = {{ height: '450px'}}>
       <Stack
         direction="column"
         justifyContent="space-between"
@@ -49,7 +49,7 @@ export default function JobCard({description, skills, id, title}) {
         padding="5px"          
       >
         <CardContent>
-          <Typography
+          <Typography        
             sx={{ color: (theme) => theme.palette.common.white }}
 
           >
